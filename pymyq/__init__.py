@@ -7,10 +7,11 @@ class MyQAPI:
 
     LIFTMASTER = 'liftmaster'
     CHAMBERLAIN = 'chamberlain'
+    CHAMBERLAIN_RO = 'chamberlain_ro'
     CRAFTSMAN = 'craftsman'
     MERLIN = 'merlin'
 
-    SUPPORTED_BRANDS = [LIFTMASTER, CHAMBERLAIN, CRAFTSMAN, MERLIN]
+    SUPPORTED_BRANDS = [LIFTMASTER, CHAMBERLAIN, CHAMBERLAIN_RO, CRAFTSMAN, MERLIN]
     SUPPORTED_DEVICE_TYPE_NAMES = ['GarageDoorOpener', 'Garage Door Opener WGDO', 'VGDO', 'Gate']
 
     APP_ID = 'app_id'
@@ -21,6 +22,9 @@ class MyQAPI:
             APP_ID: 'Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB/i'
         },
         CHAMBERLAIN: {
+            APP_ID: 'OA9I/hgmPHFp9RYKJqCKfwnhh28uqLJzZ9KOJf1DXoo8N2XAaVX6A1wcLYyWsnnv'
+        },
+        CHAMBERLAIN_RO: {
             APP_ID: 'OA9I/hgmPHFp9RYKJqCKfwnhh28uqLJzZ9KOJf1DXoo8N2XAaVX6A1wcLYyWsnnv'
         },
         CRAFTSMAN: {
@@ -182,6 +186,8 @@ class MyQAPI:
         return self.set_state(device_id, '1')
 
     def set_state(self, device_id, state):
+        if "_ro" in self.brand:
+            return true
         """Set device state."""
         payload = {
             'attributeName': 'desireddoorstate',
